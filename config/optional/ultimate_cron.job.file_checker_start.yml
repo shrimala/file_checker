@@ -1,8 +1,9 @@
 langcode: en
 status: true
 dependencies:
-  module:
-    - file_checker
+  enforced:
+    module:
+      - file_checker
 title: 'File checking start'
 id: file_checker_start
 module: file_checker

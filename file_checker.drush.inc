@@ -66,7 +66,7 @@ function drush_file_checker_file_checking_cancel() {
  * Drush logic for command file-checking-execute.
  */
 function drush_file_checker_file_checking_execute($seconds = 50) {
-  drush_print(dt('Files will be checked for up to @seconds seconds.', array('@seconds' => $seconds)));
+  drush_print(dt('Files will be checked for up to @seconds seconds. Checking now ...', array('@seconds' => $seconds)));
   $runState = \Drupal::service('file_checker.bulk_file_checking')->executeInBackground($seconds);
   if ($runState['aborted']) {
     drush_print(dt("File checking has not been previously started, checking aborted."));
@@ -74,7 +74,7 @@ function drush_file_checker_file_checking_execute($seconds = 50) {
   }
   else {
     drush_print(dt("@files_just_checked files just checked.", ['@files_just_checked' => $runState['files_just_checked']]));
-    drush_print(dt("Now checked @files_checked_count of @files_to_check files. @files_missing_count missing files detected.", [
+    drush_print(dt("So far in this run @files_checked_count out of @files_to_check files checked, with @files_missing_count missing files detected.", [
       '@files_checked_count' => $runState['files_checked_count'],
       '@files_to_check' => $runState['files_to_check'],
       '@files_missing_count' => $runState['files_missing_count'],

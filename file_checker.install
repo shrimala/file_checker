@@ -15,7 +15,7 @@ function file_checker_install() {
   $entity_manager->onFieldStorageDefinitionCreate($definition);
 
   // Start with 1 file per second as the checking speed on a new installation.
-  $this->state->set('file_checker.speed', 1);
+  \Drupal::state()->set('file_checker.speed', 1);
 }
 
 /**

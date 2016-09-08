@@ -4,6 +4,9 @@ dependencies:
   module:
     - file
     - user
+  enforced:
+    module:
+      - file_checker
 id: files_missing
 label: 'Files missing'
 module: file

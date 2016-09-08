@@ -352,12 +352,12 @@ class BulkFileChecking {
       $filesReport = $this->formatPlural($this->filesCount(), "Currently 1 file to check.", "Currently @count files to check.");
       $runStart = $this->state->get('file_checker.background_run_start');
       if (!empty($runStart)) {
-        $stateReport = t("Background file checking is under way.");
+        $stateReport = t("Background file checking has started.");
         $runStartedAgo = $this->dateFormatter->formatTimeDiffSince($runStart);
         $startedReport = t("Checking started @time_elapsed ago:", ['@time_elapsed' => $runStartedAgo]);
-        $checked = $this->state->get('file_checker.background_files_checked');
-        $checkedReport = $this->formatPlural($checked, "1 file checked, ", "@count files checked, ");
-        $missingCount = $this->state->get('file_checker.files_missing_count');
+        $checkedCount = $this->state->get('file_checker.background_files_checked_count');
+        $checkedReport = $this->formatPlural($checkedCount, "1 file checked so far, ", "@count files checked so far, ");
+        $missingCount = $this->state->get('file_checker.background_files_missing_count');
         $missingReport = $this->formatPlural($missingCount, "detected 1 missing.", "detected @count missing.");
         $progressReport = $startedReport . ' ' . $checkedReport . $missingReport;
       }
@@ -391,7 +391,9 @@ class BulkFileChecking {
   public function missingStatus() {
     $missingCount = $this->missingCount();
     if ($missingCount == 0) {
-      $missingReport = t("No missing files have been detected.");
+      $missingReport = array(
+        '#markup' => $missingReport = t("No missing files have been detected."),
+      );
     }
     else {
       $missingReport = $this->formatPlural($missingCount, "1 file is missing.", "@count files are missing.");

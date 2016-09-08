@@ -131,8 +131,8 @@ class SettingsForm extends ConfigFormBase {
   public function checkNow(array &$form, FormStateInterface $form_state) {
     $batch = array(
       'title' => t('Checking files'),
-      'init_message' => t('File checking is under way.'),
-      'progress_message' => t('Checking files: batch @current.'),
+      'init_message' => t('File checking is starting.'),
+      'progress_message' => t('Now checking files.'),
       'operations' => array(
         array('file_checker_execute_in_ui', array()),
       ),
