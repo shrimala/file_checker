@@ -69,7 +69,7 @@ CONFIGURATION
 LIMITATIONS
 ------------
 
-The current Drupal 8 verison of File Checker has not been tested on sites with large
+The current Drupal 8 version of File Checker has not been tested on sites with large
 (10,000+) amounts of files. You may experience performance issues at this scale.
  
 
@@ -82,3 +82,7 @@ Current maintainers:
 Initial development was sponsored by:
  * Awakened Heart Sangha
    A Buddhist community in the UK - visit http://www.ahs.org.uk for more information.
+   
+ @todo
+ coding standards
+ revisioning
