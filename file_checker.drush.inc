@@ -32,8 +32,11 @@ function file_checker_drush_command() {
     'arguments' => [
       'seconds' => 'Number of seconds to execute for.',
     ],
+    'options' => [
+      'log' => 'Log this execution.',
+    ],
     'examples' => [
-      'drush file-checking-execute' => 'Check files for 50 seconds.',
+      'drush file-checking-execute --log' => 'Check files for 50 seconds, and logs it.',
       'drush fcheck-exec 110' => 'Check files for 110 seconds".',
     ],
   ];
@@ -67,7 +70,7 @@ function drush_file_checker_file_checking_cancel() {
  */
 function drush_file_checker_file_checking_execute($seconds = 50) {
   drush_print(dt('Files will be checked for up to @seconds seconds. Checking now ...', array('@seconds' => $seconds)));
-  $runState = \Drupal::service('file_checker.bulk_file_checking')->executeInBackground($seconds);
+  $runState = \Drupal::service('file_checker.bulk_file_checking')->executeInBackground($seconds, drush_get_option('log',FALSE));
   if ($runState['aborted']) {
     drush_print(dt("File checking has not been previously started, checking aborted."));
     drush_print(dt("To start checking, first run 'drush file-checking-start'."));

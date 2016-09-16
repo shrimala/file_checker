@@ -93,11 +93,13 @@ class BulkFileChecking {
    *
    * @param int $timeLimit
    *   How many seconds to check files for.
+   * @param bool $shouldLog
+   *   Whether to log this execution.
    *
    * @return int
    *   The fid of the last file checked.
    */
-  public function executeInBackground($timeLimit) {
+  public function executeInBackground($timeLimit, $shouldLog = FALSE) {
     // Only execute checking if it has been requested.
     // For example, this function may be called every minute by cron,
     // to do a 1 minute chunk of work, but that doesn't mean we want to be
@@ -126,6 +128,11 @@ class BulkFileChecking {
     $runState = $this->checkForSomeTime($timeLimit, $runState);
     $runState['files_just_checked'] = $runState['files_checked_count'] - $previousFilesCheckedCount;
     $runState['files_to_check'] = $this->filesCount();
+
+    // Log this execution
+    if ($shouldLog) {
+      $this->logger->notice($runState['files_just_checked'] . " files just checked, " . $this->state->get('file_checker.speed') . " per second.");
+    }
 
     // See if the checking run has stopped.
     if ($previousLastCheckedFile != $runState['last_checked_file']) {
@@ -215,7 +222,7 @@ class BulkFileChecking {
 
       // If there are files subsequent to the last checked file, check them.
       if (count($fileIds) > 0) {
-        $runState = $this->checkFiles($fileIds, $runState, $endTime);
+        $runState = $this->checkFiles($fileIds, $runState, $endTime, $shouldLog);
       }
       // If there are not, then checking has been completed.
       else {
