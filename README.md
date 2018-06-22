@@ -14,8 +14,6 @@ It offers the following features:
  * It works with files stored locally or remotely.
  * It should work with any quantity of files.
 
-WARNING! Once you have started file checking, File checker cannot be uninstalled.
-
 USER INTERFACE
 --------------
 The File checker UI is at admin/config/media/file-system/file-checker.
@@ -124,12 +122,6 @@ INSTALLATION
    https://www.drupal.org/docs/8/extending-drupal/installing-contributed-modules
    for further information.
 
-WARNING! Once you have started file checking, File checker cannot be uninstalled.
-This is because it adds a 'missing' basefield to Drupal's file entity, and there
-is no scalable way to remove such a field at this time. However, there is no reason
-for this to be a significant problem: if you don't run File checker, it doesn't
-do anything.
-
 MAINTAINERS
 -----------
 
@@ -139,22 +131,3 @@ Current maintainers:
 Initial development was sponsored by:
  * Awakened Heart Sangha
    A Buddhist community in the UK - visit http://www.ahs.org.uk for more information.
-   
-
-KNOWN ISSUES
-------------
-These will be transferred to a project issue queue once this becomes an official branch.
-
-* Revisioning. Revisioning is becoming more widepsread for more entities in Drupal -
-it would be good to support the revisioning of file entities. In which case, the
-'missing' status of the revision should correspond to the result of the last checking
-of that revision's uri when that revision was current. However, changes to the 'missing'
-field for the current revision should not create a new revision.
-
-* Automated tests. This module badly needs tests.
-
-* 'Immediately' on-changed file checking. Has not even been manually tested.
-('Later' works fine).
-
-* Find a way to uninstall the module once there is data in the basefield.
-It doesn't have to be a properly scalable way, but some way would be good.
